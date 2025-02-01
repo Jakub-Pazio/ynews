@@ -25,7 +25,10 @@ func main() {
 
 	displayStories := story.ConvertToDisplay(stories)
 	displayStories = story.Filter(displayStories, *filterFlag)
-	fmt.Println(*filterFlag)
+	if len(displayStories) == 0 {
+		fmt.Println("Could not search for stories you are looking for 😓")
+		os.Exit(1)
+	}
 	story.StartMostPopular(displayStories)
 	story.MarkMostCommented(displayStories)
 
@@ -33,19 +36,19 @@ func main() {
 		fmt.Printf("%d: %s\n", i+1, ds)
 	}
 
-	userChoise, err := getUserNumber()
+	userChoice, err := getUserNumber()
 
 	if err != nil {
-		fmt.Println(err)
+		fmt.Println("Could not get article number 😔")
 		os.Exit(1)
 	}
 
-	if userChoise > len(displayStories) || userChoise < 1 {
+	if userChoice > len(displayStories) || userChoice < 1 {
 		fmt.Println("No article with such number")
 		os.Exit(1)
 	}
 
-	openBrowserWithArticle(displayStories[userChoise-1].Url)
+	openBrowserWithArticle(displayStories[userChoice-1].Url)
 }
 
 func getUserNumber() (int, error) {
@@ -58,12 +61,12 @@ func getUserNumber() (int, error) {
 	}
 
 	input = strings.TrimSpace(input)
-	userChoise, err := strconv.Atoi(input)
+	userChoice, err := strconv.Atoi(input)
 
 	if err != nil {
 		return 0, err
 	}
-	return userChoise, nil
+	return userChoice, nil
 }
 
 func openBrowserWithArticle(url string) {
