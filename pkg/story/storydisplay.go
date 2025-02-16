@@ -56,7 +56,7 @@ func StartMostPopular(dss []DisplayStory) {
 		}
 	}
 
-	dss[maxId].Icons = append(dss[maxId].Icons, "⭐")
+	dss[maxId].Icons = append(dss[maxId].Icons, "🔥")
 }
 func MarkMostCommented(dss []DisplayStory) {
 	if len(dss) == 0 {
