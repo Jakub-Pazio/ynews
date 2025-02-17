@@ -11,7 +11,7 @@ type DisplayStory struct {
 }
 
 func (ds DisplayStory) String() string {
-	return fmt.Sprintf("%s %s", ds.Title, strings.Join(ds.Icons, ", "))
+	return fmt.Sprintf("%s %s", ds.Title, strings.Join(ds.Icons, " "))
 }
 
 func New(s Story) DisplayStory {
